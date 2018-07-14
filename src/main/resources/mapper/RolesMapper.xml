@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gov.xmxx.dao.RolesMapper">
+  <resultMap id="BaseResultMap" type="com.gov.xmxx.pojo.Roles">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="RoleName" jdbcType="VARCHAR" property="rolename" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, RoleName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from roles
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from roles
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gov.xmxx.pojo.Roles">
+    insert into roles (Id, RoleName)
+    values (#{id,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gov.xmxx.pojo.Roles">
+    insert into roles
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="rolename != null">
+        RoleName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="rolename != null">
+        #{rolename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gov.xmxx.pojo.Roles">
+    update roles
+    <set>
+      <if test="rolename != null">
+        RoleName = #{rolename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gov.xmxx.pojo.Roles">
+    update roles
+    set RoleName = #{rolename,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectRolesNameByUsername" resultType="java.lang.String">
+    SELECT RoleName FROM roles WHERE Id IN (
+    SELECT RoleId FROM userroles WHERE UserId = (
+    SELECT users.Id FROM users WHERE Username = #{username}
+    )
+    )
+  </select>
+</mapper>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gov.xmxx.dao.ModulesMapper">
+  <resultMap id="BaseResultMap" type="com.gov.xmxx.pojo.Modules">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="ModuleName" jdbcType="VARCHAR" property="modulename" />
+    <result column="ParentId" jdbcType="INTEGER" property="parentid" />
+    <result column="Path" jdbcType="VARCHAR" property="path" />
+    <result column="Weight" jdbcType="INTEGER" property="weight" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, ModuleName, ParentId, Path, Weight
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from modules
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from modules
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gov.xmxx.pojo.Modules">
+    insert into modules (Id, ModuleName, ParentId, 
+      Path, Weight)
+    values (#{id,jdbcType=INTEGER}, #{modulename,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, 
+      #{path,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gov.xmxx.pojo.Modules">
+    insert into modules
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="modulename != null">
+        ModuleName,
+      </if>
+      <if test="parentid != null">
+        ParentId,
+      </if>
+      <if test="path != null">
+        Path,
+      </if>
+      <if test="weight != null">
+        Weight,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="modulename != null">
+        #{modulename,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null">
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gov.xmxx.pojo.Modules">
+    update modules
+    <set>
+      <if test="modulename != null">
+        ModuleName = #{modulename,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null">
+        ParentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="path != null">
+        Path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        Weight = #{weight,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gov.xmxx.pojo.Modules">
+    update modules
+    set ModuleName = #{modulename,jdbcType=VARCHAR},
+      ParentId = #{parentid,jdbcType=INTEGER},
+      Path = #{path,jdbcType=VARCHAR},
+      Weight = #{weight,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectModulesNameByUserId" resultType="java.lang.String">
+    SELECT ModuleName FROM modules WHERE Id IN (
+    SELECT ModuleId FROM rolemodules WHERE RoleId IN (
+    SELECT RoleId FROM userroles WHERE UserId = #{id}
+    )
+    )
+  </select>
+</mapper>

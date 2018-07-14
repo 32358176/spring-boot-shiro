@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gov.xmxx.dao.UsersMapper">
+  <resultMap id="BaseResultMap" type="com.gov.xmxx.pojo.Users">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="Username" jdbcType="VARCHAR" property="username" />
+    <result column="Password" jdbcType="VARCHAR" property="password" />
+    <result column="IsLockout" jdbcType="CHAR" property="islockout" />
+    <result column="LastLoginTime" jdbcType="VARCHAR" property="lastlogintime" />
+    <result column="PsdWrongTime" jdbcType="INTEGER" property="psdwrongtime" />
+    <result column="LockTime" jdbcType="VARCHAR" property="locktime" />
+    <result column="CreateTime" jdbcType="VARCHAR" property="createtime" />
+    <result column="Telephone" jdbcType="VARCHAR" property="telephone" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, Username, Password, IsLockout, LastLoginTime, PsdWrongTime, LockTime, CreateTime, 
+    Telephone
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="queryAllUser" resultMap="BaseResultMap">
+    SELECT * FROM users
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from users
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gov.xmxx.pojo.Users">
+    insert into users (Id, Username, Password, 
+      IsLockout, LastLoginTime, PsdWrongTime, 
+      LockTime, CreateTime, Telephone
+      )
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{islockout,jdbcType=CHAR}, #{lastlogintime,jdbcType=VARCHAR}, #{psdwrongtime,jdbcType=INTEGER}, 
+      #{locktime,jdbcType=VARCHAR}, #{createtime,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gov.xmxx.pojo.Users">
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="username != null">
+        Username,
+      </if>
+      <if test="password != null">
+        Password,
+      </if>
+      <if test="islockout != null">
+        IsLockout,
+      </if>
+      <if test="lastlogintime != null">
+        LastLoginTime,
+      </if>
+      <if test="psdwrongtime != null">
+        PsdWrongTime,
+      </if>
+      <if test="locktime != null">
+        LockTime,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="telephone != null">
+        Telephone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="islockout != null">
+        #{islockout,jdbcType=CHAR},
+      </if>
+      <if test="lastlogintime != null">
+        #{lastlogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="psdwrongtime != null">
+        #{psdwrongtime,jdbcType=INTEGER},
+      </if>
+      <if test="locktime != null">
+        #{locktime,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gov.xmxx.pojo.Users">
+    update users
+    <set>
+      <if test="username != null">
+        Username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="islockout != null">
+        IsLockout = #{islockout,jdbcType=CHAR},
+      </if>
+      <if test="lastlogintime != null">
+        LastLoginTime = #{lastlogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="psdwrongtime != null">
+        PsdWrongTime = #{psdwrongtime,jdbcType=INTEGER},
+      </if>
+      <if test="locktime != null">
+        LockTime = #{locktime,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        Telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gov.xmxx.pojo.Users">
+    update users
+    set Username = #{username,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      IsLockout = #{islockout,jdbcType=CHAR},
+      LastLoginTime = #{lastlogintime,jdbcType=VARCHAR},
+      PsdWrongTime = #{psdwrongtime,jdbcType=INTEGER},
+      LockTime = #{locktime,jdbcType=VARCHAR},
+      CreateTime = #{createtime,jdbcType=VARCHAR},
+      Telephone = #{telephone,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectUserByUsername" resultMap="BaseResultMap">
+    SELECT * FROM users WHERE Username = #{username}
+  </select>
+</mapper>
