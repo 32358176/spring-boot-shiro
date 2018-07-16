@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.gov.xmxx.dao.PermissionsMapper;
 import com.gov.xmxx.pojo.Page;
 import com.gov.xmxx.pojo.Permissions;
+import com.gov.xmxx.system.asp.LogAsp;
 import com.gov.xmxx.system.asp.SystemLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,11 @@ public class PermissionService {
 
     @SystemLog(description = "查询所有权限")
     public Page queryAllPermissions(Integer page, Integer limit) {
-
-        PageHelper.startPage(page, limit);
+        try {
+            PageHelper.startPage(page, limit);
+        } catch (Exception e) {
+            return new Page(204,"请指定页码");
+        }
         List<Permissions> permissions = permissionsMapper.queryAllPermissions();
         return new Page(new PageInfo(permissions));
 
@@ -70,6 +74,7 @@ public class PermissionService {
                 permissiontb.setPermissionname(methodRequestMapping.name());
                 permissiontb.setPermissionvalue(permissionURL);
                 permissiontb.setPermissionmodule(module);
+                permissiontb.setPermissionlastupdatetime(LogAsp.timeNow());
                 permissions.add(permissiontb);
             }
         }

@@ -11,7 +11,7 @@ public class Permissions {
 
     private String permissionmodule;
 
-    private Date permissionlastupdatetime;
+    private String permissionlastupdatetime;
 
     public Integer getId() {
         return id;
@@ -45,11 +45,11 @@ public class Permissions {
         this.permissionmodule = permissionmodule == null ? null : permissionmodule.trim();
     }
 
-    public Date getPermissionlastupdatetime() {
+    public String getPermissionlastupdatetime() {
         return permissionlastupdatetime;
     }
 
-    public void setPermissionlastupdatetime(Date permissionlastupdatetime) {
+    public void setPermissionlastupdatetime(String permissionlastupdatetime) {
         this.permissionlastupdatetime = permissionlastupdatetime;
     }
 }

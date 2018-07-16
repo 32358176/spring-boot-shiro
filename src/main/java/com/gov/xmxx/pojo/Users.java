@@ -20,7 +20,7 @@ public class Users implements Serializable {
 
     private String locktime;
 
-    private Date createtime;
+    private String createtime;
 
     private String telephone;
 
@@ -88,11 +88,27 @@ public class Users implements Serializable {
         this.locktime = locktime == null ? null : locktime.trim();
     }
 
-    public Date getCreatetime() {
+    @Override
+    public String toString() {
+        return "Users{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", islockout='" + islockout + '\'' +
+                ", lastlogintime='" + lastlogintime + '\'' +
+                ", lastloginip='" + lastloginip + '\'' +
+                ", psdwrongtime=" + psdwrongtime +
+                ", locktime='" + locktime + '\'' +
+                ", createtime='" + createtime + '\'' +
+                ", telephone='" + telephone + '\'' +
+                '}';
+    }
+
+    public String getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
 

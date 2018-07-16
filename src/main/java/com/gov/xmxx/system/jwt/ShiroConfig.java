@@ -112,9 +112,10 @@ public class ShiroConfig {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
         // 采用MD5方式加密
         hashedCredentialsMatcher.setHashAlgorithmName("MD5");
+//        hashedCredentialsMatcher.setHashAlgorithmName("SHA1");
         // 设置加密次数
         hashedCredentialsMatcher.setHashIterations(1024);
-        hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
+
         return hashedCredentialsMatcher;
     }
 

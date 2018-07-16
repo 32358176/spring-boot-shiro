@@ -18,8 +18,6 @@ public class SystemCredentials {
         String hashAlgorithmName ="MD5";//加密方式
         ByteSource salt = ByteSource.Util.bytes(users.getUsername());//盐值为账号
         int hashIterations = 1024;//加盐次数
-        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
         //生成加盐凭证
         SimpleHash credentialsSalt = new SimpleHash(hashAlgorithmName,users.getPassword(),salt,hashIterations);
         return credentialsSalt.toString();

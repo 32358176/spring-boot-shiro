@@ -10,7 +10,7 @@
     <result column="LastLoginIp" jdbcType="VARCHAR" property="lastloginip" />
     <result column="PsdWrongTime" jdbcType="INTEGER" property="psdwrongtime" />
     <result column="LockTime" jdbcType="VARCHAR" property="locktime" />
-    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="CreateTime" jdbcType="VARCHAR" property="createtime" />
     <result column="Telephone" jdbcType="VARCHAR" property="telephone" />
   </resultMap>
   <sql id="Base_Column_List">

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.gov.xmxx.dao.UsersMapper;
 import com.gov.xmxx.pojo.Page;
 import com.gov.xmxx.pojo.Users;
+import com.gov.xmxx.system.asp.LogAsp;
 import com.gov.xmxx.system.jwt.SystemCredentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,6 +33,7 @@ public class UserService {
 
     public Page regist(Users users) {
         String password = systemCredentials.sysCredentials(users);
+        users.setCreatetime(LogAsp.timeNow());
         users.setPassword(password);
         Integer n = usersMapper.insertSelective(users);
         if(n != 0){

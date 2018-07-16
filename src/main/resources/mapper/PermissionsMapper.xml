@@ -6,7 +6,7 @@
     <result column="PermissionValue" jdbcType="VARCHAR" property="permissionvalue" />
     <result column="PermissionName" jdbcType="VARCHAR" property="permissionname" />
     <result column="PermissionModule" jdbcType="VARCHAR" property="permissionmodule" />
-    <result column="PermissionLastUpdateTime" jdbcType="TIMESTAMP" property="permissionlastupdatetime" />
+    <result column="PermissionLastUpdateTime" jdbcType="VARCHAR" property="permissionlastupdatetime" />
   </resultMap>
   <sql id="Base_Column_List">
     Id, PermissionValue, PermissionName, PermissionModule, PermissionLastUpdateTime
