@@ -19,6 +19,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(value = "/queryAllUsers",name = "查询所有用户")
+    @RequiresRoles("超级管理员")
     public Page queryAllUsers(Integer page,Integer limit){
         return userService.queryAllUsers(page,limit);
     }
