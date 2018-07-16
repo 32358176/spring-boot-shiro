@@ -1,7 +1,6 @@
 package com.gov.xmxx.service;
 
 
-import com.gov.xmxx.pojo.Page;
 import com.gov.xmxx.pojo.Users;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -32,6 +31,7 @@ public class LoginService {
                 currentUser.login(token);
                 map.put("resultCode",200);
                 map.put("resultMessage", "登陆成功");
+                map.put("resultData",users);
             }
             // 所有认证时异常的父类.
             catch (IncorrectCredentialsException e) {
