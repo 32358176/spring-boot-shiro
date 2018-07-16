@@ -3,6 +3,7 @@ package com.gov.xmxx.dao;
 import com.gov.xmxx.pojo.Roles;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Set;
 
 @Repository
@@ -20,4 +21,6 @@ public interface RolesMapper {
     int updateByPrimaryKey(Roles record);
 
     Set<String> selectRolesNameByUsername(String username);
+
+    List<String> selectRolesByUserId(Integer userId);
 }

@@ -22,4 +22,6 @@ public interface UsersMapper {
     List<Users> queryAllUser();
 
     Users selectUserByUsername(String username);
+
+    String selectUsernameByUserId(Integer userId);
 }

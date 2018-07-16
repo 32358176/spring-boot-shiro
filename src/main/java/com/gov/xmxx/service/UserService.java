@@ -9,6 +9,7 @@ import com.gov.xmxx.system.jwt.SystemCredentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import javax.validation.Valid;
@@ -26,6 +27,7 @@ public class UserService {
         List<Users> users = usersMapper.queryAllUser();
         return new Page(new PageInfo(users));
     }
+
 
 
     public Page regist(Users users) {

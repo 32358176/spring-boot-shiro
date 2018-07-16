@@ -2,6 +2,7 @@ package com.gov.xmxx.service;
 
 
 import com.gov.xmxx.pojo.Users;
+import com.gov.xmxx.system.asp.SystemLog;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -17,6 +18,8 @@ import java.util.Map;
 @Service
 public class LoginService {
 
+
+    @SystemLog(description = "登陆操作")
     public Map loginConfirm(Users users) {
         Map<String, Object> map = new HashMap<>();
         UsernamePasswordToken token = new UsernamePasswordToken(users.getUsername(), users.getPassword());

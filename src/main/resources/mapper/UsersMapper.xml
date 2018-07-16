@@ -145,4 +145,8 @@
   <select id="selectUserByUsername" resultMap="BaseResultMap">
     SELECT * FROM users WHERE Username = #{username}
   </select>
+
+  <select id="selectUsernameByUserId" resultType="java.lang.String">
+    SELECT username FROM users WHERE Id = #{userId}
+  </select>
 </mapper>

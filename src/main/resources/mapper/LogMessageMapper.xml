@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gov.xmxx.dao.LogMessageMapper">
+  <resultMap id="BaseResultMap" type="com.gov.xmxx.pojo.LogMessage">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="Username" jdbcType="VARCHAR" property="username" />
+    <result column="Roles" jdbcType="VARCHAR" property="roles" />
+    <result column="Stutas" jdbcType="VARCHAR" property="stutas" />
+    <result column="MethodName" jdbcType="VARCHAR" property="methodname" />
+    <result column="Argus" jdbcType="VARCHAR" property="argus" />
+    <result column="desciption" jdbcType="VARCHAR" property="desciption" />
+    <result column="StartDateTime" jdbcType="VARCHAR" property="startdatetime" />
+    <result column="EndDateTime" jdbcType="VARCHAR" property="enddatetime" />
+    <result column="Time" jdbcType="VARCHAR" property="time" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.gov.xmxx.pojo.LogMessage">
+    <result column="Exception" jdbcType="LONGVARCHAR" property="exception" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, Username, Roles, Stutas, MethodName, Argus, desciption, StartDateTime, EndDateTime, 
+    Time
+  </sql>
+  <sql id="Blob_Column_List">
+    Exception
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from logmessage
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from logmessage
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gov.xmxx.pojo.LogMessage">
+    insert into logmessage (Id, Username, Roles, 
+      Stutas, MethodName, Argus, 
+      desciption, StartDateTime, EndDateTime, 
+      Time, Exception)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{roles,jdbcType=VARCHAR}, 
+      #{stutas,jdbcType=VARCHAR}, #{methodname,jdbcType=VARCHAR}, #{argus,jdbcType=VARCHAR}, 
+      #{desciption,jdbcType=VARCHAR}, #{startdatetime,jdbcType=VARCHAR}, #{enddatetime,jdbcType=VARCHAR}, 
+      #{time,jdbcType=VARCHAR}, #{exception,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gov.xmxx.pojo.LogMessage">
+    insert into logmessage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="username != null">
+        Username,
+      </if>
+      <if test="roles != null">
+        Roles,
+      </if>
+      <if test="stutas != null">
+        Stutas,
+      </if>
+      <if test="methodname != null">
+        MethodName,
+      </if>
+      <if test="argus != null">
+        Argus,
+      </if>
+      <if test="desciption != null">
+        desciption,
+      </if>
+      <if test="startdatetime != null">
+        StartDateTime,
+      </if>
+      <if test="enddatetime != null">
+        EndDateTime,
+      </if>
+      <if test="time != null">
+        Time,
+      </if>
+      <if test="exception != null">
+        Exception,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="roles != null">
+        #{roles,jdbcType=VARCHAR},
+      </if>
+      <if test="stutas != null">
+        #{stutas,jdbcType=VARCHAR},
+      </if>
+      <if test="methodname != null">
+        #{methodname,jdbcType=VARCHAR},
+      </if>
+      <if test="argus != null">
+        #{argus,jdbcType=VARCHAR},
+      </if>
+      <if test="desciption != null">
+        #{desciption,jdbcType=VARCHAR},
+      </if>
+      <if test="startdatetime != null">
+        #{startdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="enddatetime != null">
+        #{enddatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="exception != null">
+        #{exception,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gov.xmxx.pojo.LogMessage">
+    update logmessage
+    <set>
+      <if test="username != null">
+        Username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="roles != null">
+        Roles = #{roles,jdbcType=VARCHAR},
+      </if>
+      <if test="stutas != null">
+        Stutas = #{stutas,jdbcType=VARCHAR},
+      </if>
+      <if test="methodname != null">
+        MethodName = #{methodname,jdbcType=VARCHAR},
+      </if>
+      <if test="argus != null">
+        Argus = #{argus,jdbcType=VARCHAR},
+      </if>
+      <if test="desciption != null">
+        desciption = #{desciption,jdbcType=VARCHAR},
+      </if>
+      <if test="startdatetime != null">
+        StartDateTime = #{startdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="enddatetime != null">
+        EndDateTime = #{enddatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        Time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="exception != null">
+        Exception = #{exception,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gov.xmxx.pojo.LogMessage">
+    update logmessage
+    set Username = #{username,jdbcType=VARCHAR},
+      Roles = #{roles,jdbcType=VARCHAR},
+      Stutas = #{stutas,jdbcType=VARCHAR},
+      MethodName = #{methodname,jdbcType=VARCHAR},
+      Argus = #{argus,jdbcType=VARCHAR},
+      desciption = #{desciption,jdbcType=VARCHAR},
+      StartDateTime = #{startdatetime,jdbcType=VARCHAR},
+      EndDateTime = #{enddatetime,jdbcType=VARCHAR},
+      Time = #{time,jdbcType=VARCHAR},
+      Exception = #{exception,jdbcType=LONGVARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gov.xmxx.pojo.LogMessage">
+    update logmessage
+    set Username = #{username,jdbcType=VARCHAR},
+      Roles = #{roles,jdbcType=VARCHAR},
+      Stutas = #{stutas,jdbcType=VARCHAR},
+      MethodName = #{methodname,jdbcType=VARCHAR},
+      Argus = #{argus,jdbcType=VARCHAR},
+      desciption = #{desciption,jdbcType=VARCHAR},
+      StartDateTime = #{startdatetime,jdbcType=VARCHAR},
+      EndDateTime = #{enddatetime,jdbcType=VARCHAR},
+      Time = #{time,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

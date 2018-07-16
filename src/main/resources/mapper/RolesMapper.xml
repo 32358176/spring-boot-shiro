@@ -63,4 +63,9 @@
     )
     )
   </select>
+  <select id="selectRolesByUserId" resultType="java.lang.String">
+    SELECT RoleName FROM roles WHERE Id IN (
+    SELECT RoleId FROM userroles WHERE UserId = #{userId}
+    )
+  </select>
 </mapper>
