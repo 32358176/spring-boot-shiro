@@ -3,6 +3,7 @@ package com.gov.xmxx.dao;
 import com.gov.xmxx.pojo.Permissions;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Set;
 
 @Repository
@@ -20,4 +21,10 @@ public interface PermissionsMapper {
     int updateByPrimaryKey(Permissions record);
 
     Set<String> selectPermissionValueByUsername(String username);
+
+    List<Permissions> queryAllPermissions();
+
+    List<String> queryAllPermissionsValue();
+
+    Integer insertSystemPermission(List<Permissions> permissions);
 }

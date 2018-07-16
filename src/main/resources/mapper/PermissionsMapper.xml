@@ -101,4 +101,18 @@
       )
     )
   </select>
+
+  <select id="queryAllPermissions" resultMap="BaseResultMap">
+    SELECT * FROM permissions
+  </select>
+  <select id="queryAllPermissionsValue" resultType="java.lang.String">
+    SELECT PermissionValue FROM permissions
+  </select>
+
+  <insert id="insertSystemPermission" parameterType="list">
+    INSERT INTO permissions(permissionValue,permissionModule,permissionName) VALUES
+    <foreach collection="list" item="permission" separator=",">
+      (#{permission.permissionvalue},#{permission.permissionmodule},#{permission.permissionname})
+    </foreach>
+  </insert>
 </mapper>
