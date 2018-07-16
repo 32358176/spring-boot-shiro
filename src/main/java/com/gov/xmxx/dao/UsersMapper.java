@@ -19,9 +19,10 @@ public interface UsersMapper {
     int updateByPrimaryKeySelective(Users record);
 
     int updateByPrimaryKey(Users record);
+
     List<Users> queryAllUser();
 
     Users selectUserByUsername(String username);
 
-    String selectUsernameByUserId(Integer userId);
+    Integer updateLastTimeAndLastIp(@Param("id") Integer id, @Param("time") String time, @Param("ip") String ip);
 }

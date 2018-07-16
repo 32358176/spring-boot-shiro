@@ -4,11 +4,9 @@ package com.gov.xmxx.system.asp;
 import com.google.gson.Gson;
 import com.gov.xmxx.dao.LogMessageMapper;
 import com.gov.xmxx.dao.RolesMapper;
-import com.gov.xmxx.dao.UsersMapper;
 import com.gov.xmxx.pojo.LogMessage;
 import com.gov.xmxx.pojo.Users;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -98,7 +96,7 @@ public class LogAsp {
         return object;
     }
 
-    private static String timeNow() {
+    public static String timeNow() {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         return df.format(new Date());// new Date()为获取当前系统时间
     }

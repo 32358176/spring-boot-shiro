@@ -1,16 +1,21 @@
 package com.gov.xmxx.service;
 
 
+import com.gov.xmxx.dao.UsersMapper;
 import com.gov.xmxx.pojo.Users;
+import com.gov.xmxx.system.asp.LogAsp;
 import com.gov.xmxx.system.asp.SystemLog;
+import com.gov.xmxx.system.utils.IpUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +23,11 @@ import java.util.Map;
 @Service
 public class LoginService {
 
+    @Autowired
+    private HttpServletRequest request;
+
+    @Autowired
+    private UsersMapper usersMapper;
 
     @SystemLog(description = "登陆操作")
     public Map loginConfirm(Users users) {
@@ -32,9 +42,13 @@ public class LoginService {
             try {
                 // 执行登录.
                 currentUser.login(token);
+                String ip = IpUtils.getRemoteHost(request);
+                Users user = (Users) currentUser.getPrincipal();
+                String time = LogAsp.timeNow();
+                usersMapper.updateLastTimeAndLastIp(user.getId(),time,ip);
                 map.put("resultCode",200);
                 map.put("resultMessage", "登陆成功");
-                map.put("resultData",users);
+                map.put("resultData",user);
             }
             // 所有认证时异常的父类.
             catch (IncorrectCredentialsException e) {

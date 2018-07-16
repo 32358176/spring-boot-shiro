@@ -1,26 +1,26 @@
 package com.gov.xmxx.pojo;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 public class Users implements Serializable {
     private Integer id;
 
-    @NotNull(message = "用户名不能为空")
     private String username;
 
-    @NotNull(message = "密码不能为空")
     private String password;
 
     private String islockout;
 
     private String lastlogintime;
 
+    private String lastloginip;
+
     private Integer psdwrongtime;
 
     private String locktime;
 
-    private String createtime;
+    private Date createtime;
 
     private String telephone;
 
@@ -64,6 +64,14 @@ public class Users implements Serializable {
         this.lastlogintime = lastlogintime == null ? null : lastlogintime.trim();
     }
 
+    public String getLastloginip() {
+        return lastloginip;
+    }
+
+    public void setLastloginip(String lastloginip) {
+        this.lastloginip = lastloginip == null ? null : lastloginip.trim();
+    }
+
     public Integer getPsdwrongtime() {
         return psdwrongtime;
     }
@@ -80,12 +88,12 @@ public class Users implements Serializable {
         this.locktime = locktime == null ? null : locktime.trim();
     }
 
-    public String getCreatetime() {
+    public Date getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(String createtime) {
-        this.createtime = createtime == null ? null : createtime.trim();
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
     }
 
     public String getTelephone() {
@@ -94,20 +102,5 @@ public class Users implements Serializable {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone == null ? null : telephone.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "Users{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", islockout='" + islockout + '\'' +
-                ", lastlogintime='" + lastlogintime + '\'' +
-                ", psdwrongtime=" + psdwrongtime +
-                ", locktime='" + locktime + '\'' +
-                ", createtime='" + createtime + '\'' +
-                ", telephone='" + telephone + '\'' +
-                '}';
     }
 }

@@ -7,14 +7,15 @@
     <result column="Password" jdbcType="VARCHAR" property="password" />
     <result column="IsLockout" jdbcType="CHAR" property="islockout" />
     <result column="LastLoginTime" jdbcType="VARCHAR" property="lastlogintime" />
+    <result column="LastLoginIp" jdbcType="VARCHAR" property="lastloginip" />
     <result column="PsdWrongTime" jdbcType="INTEGER" property="psdwrongtime" />
     <result column="LockTime" jdbcType="VARCHAR" property="locktime" />
-    <result column="CreateTime" jdbcType="VARCHAR" property="createtime" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="Telephone" jdbcType="VARCHAR" property="telephone" />
   </resultMap>
   <sql id="Base_Column_List">
-    Id, Username, Password, IsLockout, LastLoginTime, PsdWrongTime, LockTime, CreateTime, 
-    Telephone
+    Id, Username, Password, IsLockout, LastLoginTime, LastLoginIp, PsdWrongTime, LockTime, 
+    CreateTime, Telephone
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -22,22 +23,19 @@
     from users
     where Id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="queryAllUser" resultMap="BaseResultMap">
-    SELECT * FROM users
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from users
     where Id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.gov.xmxx.pojo.Users">
     insert into users (Id, Username, Password, 
-      IsLockout, LastLoginTime, PsdWrongTime, 
-      LockTime, CreateTime, Telephone
-      )
+      IsLockout, LastLoginTime, LastLoginIp, 
+      PsdWrongTime, LockTime, CreateTime, 
+      Telephone)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{islockout,jdbcType=CHAR}, #{lastlogintime,jdbcType=VARCHAR}, #{psdwrongtime,jdbcType=INTEGER}, 
-      #{locktime,jdbcType=VARCHAR}, #{createtime,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}
-      )
+      #{islockout,jdbcType=CHAR}, #{lastlogintime,jdbcType=VARCHAR}, #{lastloginip,jdbcType=VARCHAR}, 
+      #{psdwrongtime,jdbcType=INTEGER}, #{locktime,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{telephone,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.gov.xmxx.pojo.Users">
     insert into users
@@ -56,6 +54,9 @@
       </if>
       <if test="lastlogintime != null">
         LastLoginTime,
+      </if>
+      <if test="lastloginip != null">
+        LastLoginIp,
       </if>
       <if test="psdwrongtime != null">
         PsdWrongTime,
@@ -86,6 +87,9 @@
       <if test="lastlogintime != null">
         #{lastlogintime,jdbcType=VARCHAR},
       </if>
+      <if test="lastloginip != null">
+        #{lastloginip,jdbcType=VARCHAR},
+      </if>
       <if test="psdwrongtime != null">
         #{psdwrongtime,jdbcType=INTEGER},
       </if>
@@ -93,7 +97,7 @@
         #{locktime,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null">
-        #{createtime,jdbcType=VARCHAR},
+        #{createtime,jdbcType=TIMESTAMP},
       </if>
       <if test="telephone != null">
         #{telephone,jdbcType=VARCHAR},
@@ -115,6 +119,9 @@
       <if test="lastlogintime != null">
         LastLoginTime = #{lastlogintime,jdbcType=VARCHAR},
       </if>
+      <if test="lastloginip != null">
+        LastLoginIp = #{lastloginip,jdbcType=VARCHAR},
+      </if>
       <if test="psdwrongtime != null">
         PsdWrongTime = #{psdwrongtime,jdbcType=INTEGER},
       </if>
@@ -122,7 +129,7 @@
         LockTime = #{locktime,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null">
-        CreateTime = #{createtime,jdbcType=VARCHAR},
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
       </if>
       <if test="telephone != null">
         Telephone = #{telephone,jdbcType=VARCHAR},
@@ -136,17 +143,22 @@
       Password = #{password,jdbcType=VARCHAR},
       IsLockout = #{islockout,jdbcType=CHAR},
       LastLoginTime = #{lastlogintime,jdbcType=VARCHAR},
+      LastLoginIp = #{lastloginip,jdbcType=VARCHAR},
       PsdWrongTime = #{psdwrongtime,jdbcType=INTEGER},
       LockTime = #{locktime,jdbcType=VARCHAR},
-      CreateTime = #{createtime,jdbcType=VARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
       Telephone = #{telephone,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+
   <select id="selectUserByUsername" resultMap="BaseResultMap">
     SELECT * FROM users WHERE Username = #{username}
   </select>
 
-  <select id="selectUsernameByUserId" resultType="java.lang.String">
-    SELECT username FROM users WHERE Id = #{userId}
+  <select id="queryAllUser" resultMap="BaseResultMap">
+    SELECT * FROM users
   </select>
+  <update id="updateLastTimeAndLastIp">
+    UPDATE users SET LastLoginTime = #{time} , LastLoginIp = #{ip} WHERE Id = #{id}
+  </update>
 </mapper>

@@ -24,6 +24,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/regist",name = "注册账号")
+    @RequiresRoles("超级管理员")
     public Page regist(Users users){
         return userService.regist(users);
     }
