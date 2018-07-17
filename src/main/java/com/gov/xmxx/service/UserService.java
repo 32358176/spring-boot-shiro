@@ -32,6 +32,10 @@ public class UserService {
 
 
     public Page regist(Users users) {
+        Users user = usersMapper.selectUserByUsername(users.getUsername());
+        if(user != null){
+            return new Page(206,"用户名已存在");
+        }
         String password = systemCredentials.sysCredentials(users);
         users.setCreatetime(LogAsp.timeNow());
         users.setPassword(password);

@@ -34,7 +34,7 @@ public class PermissionService {
         try {
             PageHelper.startPage(page, limit);
         } catch (Exception e) {
-            return new Page(204,"请指定页码");
+            return new Page(204,"分页参数传递错误！");
         }
         List<Permissions> permissions = permissionsMapper.queryAllPermissions();
         return new Page(new PageInfo(permissions));

@@ -4,10 +4,7 @@ import com.gov.xmxx.pojo.Page;
 import com.gov.xmxx.service.PermissionService;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -24,7 +21,7 @@ public class PermissionController {
     private PermissionService permissionService;
 
 
-    @GetMapping(value = "/queryAll",name = "查询所有权限")
+    @PostMapping(value = "/queryAll",name = "查询所有权限")
     @RequiresRoles("超级管理员")
     public Page queryAllPermissions(Integer page,Integer limit){
         return permissionService.queryAllPermissions(page,limit);
