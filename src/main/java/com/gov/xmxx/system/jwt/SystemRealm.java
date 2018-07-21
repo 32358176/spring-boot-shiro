@@ -4,7 +4,6 @@ import com.gov.xmxx.dao.PermissionsMapper;
 import com.gov.xmxx.dao.RolesMapper;
 import com.gov.xmxx.dao.UsersMapper;
 import com.gov.xmxx.pojo.Users;
-import com.gov.xmxx.system.exception.RoleException;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;

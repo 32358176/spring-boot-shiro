@@ -97,4 +97,11 @@
     )
     )
   </select>
+    <select id="selectModulesByUserId" resultMap="BaseResultMap">
+        SELECT * FROM modules WHERE Id IN (
+    SELECT ModuleId FROM rolemodules WHERE RoleId IN (
+    SELECT RoleId FROM userroles WHERE UserId = #{id}
+    )
+    )
+    </select>
 </mapper>

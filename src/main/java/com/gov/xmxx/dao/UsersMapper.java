@@ -20,7 +20,7 @@ public interface UsersMapper {
 
     int updateByPrimaryKey(Users record);
 
-    List<Users> queryAllUser();
+    List<Users> queryAllUser(Users users);
 
     Users selectUserByUsername(String username);
 

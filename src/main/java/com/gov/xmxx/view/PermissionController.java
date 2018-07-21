@@ -22,13 +22,13 @@ public class PermissionController {
 
 
     @PostMapping(value = "/queryAll",name = "查询所有权限")
-    @RequiresRoles("超级管理员")
+//    @RequiresRoles("超级管理员")
     public Page queryAllPermissions(Integer page,Integer limit){
         return permissionService.queryAllPermissions(page,limit);
     }
 
     @GetMapping(value = "/updatePermission",name = "更新系统权限")
-    @RequiresRoles("超级管理员")
+//    @RequiresRoles("超级管理员")
     public String updatePermission(){
         return permissionService.updatePermission();
     }

@@ -6,6 +6,7 @@ import com.gov.xmxx.pojo.Users;
 import com.gov.xmxx.system.asp.LogAsp;
 import com.gov.xmxx.system.asp.SystemLog;
 import com.gov.xmxx.system.utils.IpUtils;
+import com.sun.deploy.net.HttpResponse;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -15,7 +16,9 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +31,7 @@ public class LoginService {
 
     @Autowired
     private UsersMapper usersMapper;
+
 
     @SystemLog(description = "登陆操作")
     public Map loginConfirm(Users users) {
@@ -49,6 +53,7 @@ public class LoginService {
                 map.put("resultCode",200);
                 map.put("resultMessage", "登陆成功");
                 map.put("resultData",user);
+
             }
             // 所有认证时异常的父类.
             catch (IncorrectCredentialsException e) {

@@ -37,15 +37,19 @@ public class LoginController {
     }
 
     @GetMapping("/logout")
-    public Map<String,Object> logout(){
-        Map<String, Object> resultMap = new HashMap<>();
-        try {
+    public Map<String,String> logout(){
+        Map<String, String> resultMap = new HashMap<>();
+//        try {
             //退出
             SecurityUtils.getSubject().logout();
-        } catch (Exception e) {
-            resultMap.put("204","登出失败!");
-        }
-        resultMap.put("200","登出成功!");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            resultMap.put("code","200");
+//            resultMap.put("msg","登出成功！");
+//        }
+//        resultMap.put("code","204");
+//        resultMap.put("msg","登出失败！");
+        resultMap.put("200","登出成功");
         return resultMap;
     }
 }

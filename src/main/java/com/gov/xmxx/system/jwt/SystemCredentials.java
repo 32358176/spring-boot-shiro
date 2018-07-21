@@ -1,7 +1,6 @@
 package com.gov.xmxx.system.jwt;
 
 import com.gov.xmxx.pojo.Users;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Component;

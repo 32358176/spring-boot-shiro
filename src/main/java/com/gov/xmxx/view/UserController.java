@@ -20,34 +20,36 @@ public class UserController {
 
     @GetMapping(value = "/queryAllUsers",name = "查询所有用户")
     @RequiresRoles("超级管理员")
-    public Page queryAllUsers(Integer page,Integer limit){
-        return userService.queryAllUsers(page,limit);
+//    @RequiresPermissions(value = "查询所有用户")
+    public Page queryAllUsers(Integer page,Integer limit,Users users){
+
+        return userService.queryAllUsers(page,limit,users);
     }
 
     @PostMapping(value = "/regist",name = "注册账号")
-    @RequiresRoles("超级管理员")
+//    @RequiresRoles("超级管理员")
     public Page regist(Users users){
         return userService.regist(users);
     }
     /**
      * 用户必须登录
      */
-    @GetMapping("/require_auth")
-    @RequiresAuthentication
-    public Page requireAuth() {
-        return new Page(200, "你已登陆");
-    }
-
-    @GetMapping("/require_role")
-    @RequiresRoles("超级管理员")
-    public Page requireRole() {
-        return new Page(200, "你拥有访问角色");
-    }
-
-    @GetMapping("/require_permission")
-    @RequiresPermissions(logical = Logical.OR, value = {"修改", "删除"})
-    public Page requirePermission() {
-        return new Page(200, "你拥有修改，删除权限");
-    }
+//    @GetMapping("/require_auth")
+//    @RequiresAuthentication
+//    public Page requireAuth() {
+//        return new Page(200, "你已登陆");
+//    }
+//
+//    @GetMapping("/require_role")
+//    @RequiresRoles("超级管理员")
+//    public Page requireRole() {
+//        return new Page(200, "你拥有访问角色");
+//    }
+//
+//    @GetMapping("/require_permission")
+//    @RequiresPermissions(logical = Logical.OR, value = {"修改", "删除"})
+//    public Page requirePermission() {
+//        return new Page(200, "你拥有修改，删除权限");
+//    }
 
 }

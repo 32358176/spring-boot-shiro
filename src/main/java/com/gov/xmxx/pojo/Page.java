@@ -1,6 +1,7 @@
 package com.gov.xmxx.pojo;
 
 
+import com.github.pagehelper.PageInfo;
 
 /**
  * @author Han Yong
@@ -26,6 +27,13 @@ public class Page {
                 ", count=" + count +
                 ", data=" + data +
                 '}';
+    }
+
+    public Page(PageInfo pageInfo) {
+        this.code = 0;
+        this.msg = "成功";
+        this.count = pageInfo.getTotal();
+        this.data = pageInfo.getList();
     }
 
     public Page(Integer code, String msg, long count, Object data) {

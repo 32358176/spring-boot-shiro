@@ -93,7 +93,7 @@
     where Id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectPermissionValueByUsername" resultType="java.lang.String">
-    SELECT PermissionName FROM permissions WHERE Id IN (
+    SELECT PermissionValue FROM permissions WHERE Id IN (
       SELECT PermissionId FROM rolespermissions WHERE RoleId IN (
       SELECT RoleId FROM userroles WHERE UserId = (
       SELECT users.Id FROM users WHERE Username = #{username}
